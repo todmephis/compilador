@@ -1,0 +1,56 @@
+....:::::Elemetos del Lenguaje:::::....
+
+1.] PalbrasReservadas
+
+	"NombreServidor"	
+	"RaizServidor"		
+	"PuertoEscucha" 	
+	"AdminServidor" 	
+	"UsuarioApache"		
+	"GrupoApache"		
+	"ArchivoPid"		
+	"RaizDeDocumentos"
+
+	Token: PALRESERV
+
+2.] Comentarios
+
+	Ex. # Esto es un comentario
+
+	Regex: ^#.
+
+	Token: COM
+
+3.] Cadenas de Texto entre comillas
+
+	Ex. "/var/www/html"
+
+	Regex: \"(\\.|[^\\"\n])*\"
+
+	Token: ARG
+
+4.] Números enteros
+
+	Regex: ([0-9])+
+
+	Token: NUM
+
+5.] Puertos 1 - 65535
+
+	Regex: ([1-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5]) 
+
+	Token: PORT
+
+6.] Agrupador de directivas (Apertura)
+
+	Ex. <Directory>
+
+7.] Agrupaor de directivas (Cierre)
+
+
+^<{L}+>?			{printf("DirectivaApertura: %s", yytext);}
+^<\/{L}+>?			{printf("DirectivaCierre: %s", yytext);}
+
+	Ex. </Directory>
+
+

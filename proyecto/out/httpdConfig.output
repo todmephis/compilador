@@ -1,0 +1,338 @@
+Terminals unused in grammar
+
+   PORT
+
+
+State 8 conflicts: 1 shift/reduce
+State 9 conflicts: 1 shift/reduce
+State 10 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: input $end
+
+    1 input: %empty
+    2      | input linea
+
+    3 linea: '\n'
+    4      | grupodirectivas
+    5      | grupodirectivas '\n'
+    6      | comentario
+    7      | comentario '\n'
+    8      | directiva
+    9      | directiva '\n'
+
+   10 grupodirectivas: TAGAI PALRESERV TAGAF listacontenido TAGC PALRESERV TAGAF
+
+   11 listacontenido: contenido
+   12               | listacontenido contenido
+
+   13 contenido: comentario
+   14          | directiva
+
+   15 comentario: COM
+
+   16 directiva: PALRESERV serieargumentos SEMICOLON
+
+   17 serieargumentos: serieargumentos argumento
+   18                | argumento
+
+   19 argumento: ARG
+   20          | NUM
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'\n' (10) 3 5 7 9
+error (256)
+PALRESERV (258) 10 16
+COM (259) 15
+ARG (260) 19
+NUM (261) 20
+PORT (262)
+SEMICOLON (263) 16
+TAGAI (264) 10
+TAGAF (265) 10
+TAGC (266) 10
+
+
+Nonterminals, with rules where they appear
+
+$accept (13)
+    on left: 0
+input (14)
+    on left: 1 2, on right: 0 2
+linea (15)
+    on left: 3 4 5 6 7 8 9, on right: 2
+grupodirectivas (16)
+    on left: 10, on right: 4 5
+listacontenido (17)
+    on left: 11 12, on right: 10 12
+contenido (18)
+    on left: 13 14, on right: 11 12
+comentario (19)
+    on left: 15, on right: 6 7 13
+directiva (20)
+    on left: 16, on right: 8 9 14
+serieargumentos (21)
+    on left: 17 18, on right: 16 17
+argumento (22)
+    on left: 19 20, on right: 17 18
+
+
+State 0
+
+    0 $accept: . input $end
+
+    $default  reduce using rule 1 (input)
+
+    input  go to state 1
+
+
+State 1
+
+    0 $accept: input . $end
+    2 input: input . linea
+
+    $end       shift, and go to state 2
+    PALRESERV  shift, and go to state 3
+    COM        shift, and go to state 4
+    TAGAI      shift, and go to state 5
+    '\n'       shift, and go to state 6
+
+    linea            go to state 7
+    grupodirectivas  go to state 8
+    comentario       go to state 9
+    directiva        go to state 10
+
+
+State 2
+
+    0 $accept: input $end .
+
+    $default  accept
+
+
+State 3
+
+   16 directiva: PALRESERV . serieargumentos SEMICOLON
+
+    ARG  shift, and go to state 11
+    NUM  shift, and go to state 12
+
+    serieargumentos  go to state 13
+    argumento        go to state 14
+
+
+State 4
+
+   15 comentario: COM .
+
+    $default  reduce using rule 15 (comentario)
+
+
+State 5
+
+   10 grupodirectivas: TAGAI . PALRESERV TAGAF listacontenido TAGC PALRESERV TAGAF
+
+    PALRESERV  shift, and go to state 15
+
+
+State 6
+
+    3 linea: '\n' .
+
+    $default  reduce using rule 3 (linea)
+
+
+State 7
+
+    2 input: input linea .
+
+    $default  reduce using rule 2 (input)
+
+
+State 8
+
+    4 linea: grupodirectivas .
+    5      | grupodirectivas . '\n'
+
+    '\n'  shift, and go to state 16
+
+    '\n'      [reduce using rule 4 (linea)]
+    $default  reduce using rule 4 (linea)
+
+
+State 9
+
+    6 linea: comentario .
+    7      | comentario . '\n'
+
+    '\n'  shift, and go to state 17
+
+    '\n'      [reduce using rule 6 (linea)]
+    $default  reduce using rule 6 (linea)
+
+
+State 10
+
+    8 linea: directiva .
+    9      | directiva . '\n'
+
+    '\n'  shift, and go to state 18
+
+    '\n'      [reduce using rule 8 (linea)]
+    $default  reduce using rule 8 (linea)
+
+
+State 11
+
+   19 argumento: ARG .
+
+    $default  reduce using rule 19 (argumento)
+
+
+State 12
+
+   20 argumento: NUM .
+
+    $default  reduce using rule 20 (argumento)
+
+
+State 13
+
+   16 directiva: PALRESERV serieargumentos . SEMICOLON
+   17 serieargumentos: serieargumentos . argumento
+
+    ARG        shift, and go to state 11
+    NUM        shift, and go to state 12
+    SEMICOLON  shift, and go to state 19
+
+    argumento  go to state 20
+
+
+State 14
+
+   18 serieargumentos: argumento .
+
+    $default  reduce using rule 18 (serieargumentos)
+
+
+State 15
+
+   10 grupodirectivas: TAGAI PALRESERV . TAGAF listacontenido TAGC PALRESERV TAGAF
+
+    TAGAF  shift, and go to state 21
+
+
+State 16
+
+    5 linea: grupodirectivas '\n' .
+
+    $default  reduce using rule 5 (linea)
+
+
+State 17
+
+    7 linea: comentario '\n' .
+
+    $default  reduce using rule 7 (linea)
+
+
+State 18
+
+    9 linea: directiva '\n' .
+
+    $default  reduce using rule 9 (linea)
+
+
+State 19
+
+   16 directiva: PALRESERV serieargumentos SEMICOLON .
+
+    $default  reduce using rule 16 (directiva)
+
+
+State 20
+
+   17 serieargumentos: serieargumentos argumento .
+
+    $default  reduce using rule 17 (serieargumentos)
+
+
+State 21
+
+   10 grupodirectivas: TAGAI PALRESERV TAGAF . listacontenido TAGC PALRESERV TAGAF
+
+    PALRESERV  shift, and go to state 3
+    COM        shift, and go to state 4
+
+    listacontenido  go to state 22
+    contenido       go to state 23
+    comentario      go to state 24
+    directiva       go to state 25
+
+
+State 22
+
+   10 grupodirectivas: TAGAI PALRESERV TAGAF listacontenido . TAGC PALRESERV TAGAF
+   12 listacontenido: listacontenido . contenido
+
+    PALRESERV  shift, and go to state 3
+    COM        shift, and go to state 4
+    TAGC       shift, and go to state 26
+
+    contenido   go to state 27
+    comentario  go to state 24
+    directiva   go to state 25
+
+
+State 23
+
+   11 listacontenido: contenido .
+
+    $default  reduce using rule 11 (listacontenido)
+
+
+State 24
+
+   13 contenido: comentario .
+
+    $default  reduce using rule 13 (contenido)
+
+
+State 25
+
+   14 contenido: directiva .
+
+    $default  reduce using rule 14 (contenido)
+
+
+State 26
+
+   10 grupodirectivas: TAGAI PALRESERV TAGAF listacontenido TAGC . PALRESERV TAGAF
+
+    PALRESERV  shift, and go to state 28
+
+
+State 27
+
+   12 listacontenido: listacontenido contenido .
+
+    $default  reduce using rule 12 (listacontenido)
+
+
+State 28
+
+   10 grupodirectivas: TAGAI PALRESERV TAGAF listacontenido TAGC PALRESERV . TAGAF
+
+    TAGAF  shift, and go to state 29
+
+
+State 29
+
+   10 grupodirectivas: TAGAI PALRESERV TAGAF listacontenido TAGC PALRESERV TAGAF .
+
+    $default  reduce using rule 10 (grupodirectivas)

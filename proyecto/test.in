@@ -1,0 +1,5 @@
+AdminServidor "arg1" "arg2" "arg3";
+#Otro comentario
+PuertoEscucha 100;
+#Comentario
+<NombreServidor> AdminServidor "argumento"; PuertoEscucha 90; </NombreServidor>
